@@ -11,7 +11,7 @@ public class PaymentScheme {
         double a = 0.05/12;
 
         BigDecimal monto = new BigDecimal("200000");
-        BigDecimal r = new BigDecimal(a).setScale(10, RoundingMode.HALF_EVEN);
+        BigDecimal r = BigDecimal.valueOf(a);
         int months = 360;
 
         BigDecimal one = BigDecimal.ONE;
@@ -21,8 +21,7 @@ public class PaymentScheme {
 
         BigDecimal up = monto.multiply(r);
         BigDecimal down = one.subtract(one.add(r.negate()).pow(months));
-        BigDecimal result = up.divide(down, MathContext.DECIMAL128);
-        result = result.setScale(2, RoundingMode.HALF_EVEN);
+        BigDecimal result = up.divide(down, 2, RoundingMode.HALF_EVEN);;
 
         System.out.println("Pago Mensual: " + result);
 

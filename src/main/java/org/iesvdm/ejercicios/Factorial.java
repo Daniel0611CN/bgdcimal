@@ -7,10 +7,10 @@ public class Factorial {
     public static void main(String[] args) {
 
         BigInteger bgInteger1 = new BigInteger("7");
-        Integer aux = bgInteger1.intValue();
+        int aux = bgInteger1.intValue();
 
         for (int i = bgInteger1.intValue()-1; i > 0; i--) {
-            bgInteger1 = BigInteger.valueOf(i*bgInteger1.intValue());
+            bgInteger1 = BigInteger.valueOf(i).multiply(bgInteger1);
         }
 
         System.out.println("Valor Factorial de " + aux + ": " + bgInteger1);

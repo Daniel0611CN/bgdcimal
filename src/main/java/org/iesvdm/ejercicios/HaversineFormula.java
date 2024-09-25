@@ -1,29 +1,30 @@
 package org.iesvdm.ejercicios;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 public class HaversineFormula {
 
-    private float Latitud;
-    private float Longitud;
+    private BigDecimal Latitud;
+    private BigDecimal Longitud;
 
     // Todo esto pasarlo a BigDecimal;
 
-    public float getLatitud() {
+    public BigDecimal getLatitud() {
         return Latitud;
     }
 
-    public void setLatitud(float latitud) {
-        Latitud = 3;
-    }
+    public void setLatitud(BigDecimal latitud) { Latitud = new BigDecimal("3"); }
 
-    public float getLongitud() {
+    public BigDecimal getLongitud() {
         return Longitud;
     }
 
-    public void setLongitud(float longitud) {
-        Longitud = 5;
+    public void setLongitud(BigDecimal longitud) {
+        Longitud = new BigDecimal("5");
     }
 
-    public HaversineFormula(float latitud, float longitud) {
+    public HaversineFormula(BigDecimal latitud, BigDecimal longitud) {
         Latitud = latitud;
         Longitud = longitud;
     }
@@ -32,12 +33,23 @@ public class HaversineFormula {
     {
         public static float RadioTierraKm = 6378;
         public static float DistanciaKm(HaversineFormula posOrigen, HaversineFormula posDestino) {
-            float difLatitud = EnRadianes(posDestino.Latitud - posOrigen.Latitud);
-            float difLongitud = EnRadianes(posDestino.Longitud - posOrigen.Longitud);
-            
-            float a = (float) AlCuadrado(Math.sin(difLatitud/2)) + EnRadianes((float) Math.cos(posOrigen.Latitud))*EnRadianes((float) Math.cos(posDestino.Latitud))*(float) AlCuadrado(Math.sin(difLongitud/2));
+            float difLatitud = EnRadianes(posDestino.Latitud.floatValue() - posOrigen.Latitud.floatValue());
+            float difLongitud = EnRadianes(posDestino.Longitud.floatValue() - posOrigen.Longitud.floatValue());
+
+            float aux1 = posOrigen.Latitud.floatValue();
+            float aux2 = posDestino.Latitud.floatValue();
+
+            float a = (float) AlCuadrado(Math.sin(difLatitud/2)) + EnRadianes((float) Math.cos(aux1))*EnRadianes((float) Math.cos(aux2))*(float) AlCuadrado(Math.sin(difLongitud/2));
             float c = (float) (2*Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
-            // System.out.println("Aquí se imprimen los resultados.");
+
+            BigDecimal result1 = BigDecimal.valueOf(a);
+            BigDecimal result2 = BigDecimal.valueOf(c);
+
+            System.out.println("Diferencia de Latitud: " + difLatitud);
+            System.out.println("Diferencia de Longitud: " + difLongitud);
+            System.out.println("Mitad del Cuadrado de la Distancia en Linea Recta: " + a);
+            System.out.println("Distancia en Kilómetros: " + c);
+
             return RadioTierraKm*c;
 
         }
@@ -52,7 +64,7 @@ public class HaversineFormula {
     }
 
     public static void main(String[] args) {
-        Extensiones.DistanciaKm(new HaversineFormula(2, 4), new HaversineFormula(6, 12));
+        Extensiones.DistanciaKm(new HaversineFormula(BigDecimal.TWO, BigDecimal.valueOf(4)), new HaversineFormula(BigDecimal.valueOf(6), BigDecimal.valueOf(12)));
     }
 
 }
