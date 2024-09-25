@@ -2,6 +2,7 @@ package org.iesvdm.ejercicios;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.MathContext;
 
 public class HaversineFormula {
 
@@ -42,8 +43,8 @@ public class HaversineFormula {
             float a = (float) AlCuadrado(Math.sin(difLatitud/2)) + EnRadianes((float) Math.cos(aux1))*EnRadianes((float) Math.cos(aux2))*(float) AlCuadrado(Math.sin(difLongitud/2));
             float c = (float) (2*Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
 
-            BigDecimal result1 = BigDecimal.valueOf(a);
-            BigDecimal result2 = BigDecimal.valueOf(c);
+            BigDecimal result1 = BigDecimal.valueOf(a).round(MathContext.DECIMAL128);
+            BigDecimal result2 = BigDecimal.valueOf(c).round(MathContext.DECIMAL128);
 
             System.out.println("Diferencia de Latitud: " + difLatitud);
             System.out.println("Diferencia de Longitud: " + difLongitud);
