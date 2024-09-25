@@ -1,6 +1,4 @@
 package org.iesvdm.ejercicios;
 
-
-public class ejclase {
-    
+public class ej1 {
 }
