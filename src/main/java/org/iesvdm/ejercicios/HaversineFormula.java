@@ -9,8 +9,6 @@ public class HaversineFormula {
     private BigDecimal Latitud;
     private BigDecimal Longitud;
 
-    // Todo esto pasarlo a BigDecimal;
-
     public BigDecimal getLatitud() {
         return Latitud;
     }
